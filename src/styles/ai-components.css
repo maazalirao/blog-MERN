@@ -1,0 +1,198 @@
+/* AI Components Stylesheet */
+/* This file contains styles for the AI components and new UI elements using a modern CSS framework. */
+
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: #34495e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.app-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.app-footer {
+  background-color: #34495e;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Smart Editor Styles */
+.smart-editor-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.editor-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.generate-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.generate-button:hover {
+  background-color: #2980b9;
+}
+
+.suggestions-container {
+  margin-top: 20px;
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.suggestion-item {
+  background-color: #ecf0f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #bdc3c7;
+}
+
+/* Content Analyzer Styles */
+.content-analyzer-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.analyzer-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.analyze-button {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.analyze-button:hover {
+  background-color: #27ae60;
+}
+
+.analysis-results {
+  margin-top: 20px;
+}
+
+.analysis-section {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Topic Generator Styles */
+.topic-generator-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.topic-input {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.topic-actions .generate-button {
+  background-color: #9b59b6;
+  color: #fff;
+}
+
+.topic-actions .generate-button:hover {
+  background-color: #8e44ad;
+}
+
+.topics-list-container {
+  margin-top: 20px;
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+}
+
+.topic-item {
+  background-color: #ecf0f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.topic-item:hover {
+  background-color: #bdc3c7;
+}
