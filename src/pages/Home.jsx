@@ -2,12 +2,17 @@ import { Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { useState, useEffect } from 'react';
 import './Home.css';
+import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
+import axios from 'axios';
 
 const Home = () => {
   const { blogs } = useBlog();
   const [email, setEmail] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Animation effect on page load
   useEffect(() => {
@@ -22,6 +27,20 @@ const Home = () => {
         element.classList.add('animate-in');
       }, 300 * index);
     });
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get('/api/posts');
+        setPosts(res.data);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+    fetchPosts();
   }, []);
 
   const handleSubscribe = (e) => {
@@ -59,7 +78,90 @@ const Home = () => {
   const popularTags = ['React', 'JavaScript', 'Web Development', 'CSS', 'Node.js', 'API', 'Frontend'];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="home">
+      {/* Enhanced stylish header with improved Tailwind styling */}
+      <header className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-xl">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <Link to="/" className="text-white text-2xl font-bold flex items-center group">
+              <span className="bg-white text-indigo-600 h-8 w-8 rounded-full flex items-center justify-center mr-2 shadow-md group-hover:scale-110 transition-transform duration-300">B</span>
+              <span className="group-hover:text-blue-200 transition-colors duration-300">BlogApp</span>
+            </Link>
+            
+            {/* Desktop Navigation with enhanced styling */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <div className="flex space-x-1">
+                <Link to="/" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Home</Link>
+                <Link to="/write" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Write</Link>
+                <Link to="/about" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">About</Link>
+                <Link to="/contact" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Contact</Link>
+              </div>
+              
+              <div className="relative group">
+                <input 
+                  type="text" 
+                  placeholder="Search..." 
+                  className="bg-white/10 text-white placeholder-white/70 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 w-40 group-hover:w-48 transition-all duration-300"
+                />
+                <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 group-hover:text-white transition-colors duration-300" />
+              </div>
+              
+              <div className="flex space-x-3">
+                <Link to="/login" className="bg-white text-indigo-600 px-5 py-2 rounded-full font-medium hover:bg-blue-100 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105">Login</Link>
+                <Link to="/register" className="bg-indigo-800/30 backdrop-blur-sm text-white border border-white/20 px-5 py-2 rounded-full font-medium hover:bg-indigo-800/50 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105">Sign Up</Link>
+              </div>
+            </nav>
+            
+            {/* Mobile menu button with animation */}
+            <button 
+              className="md:hidden text-white text-xl p-2 rounded-md hover:bg-white/10 transition-colors duration-300 focus:outline-none"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <FaTimes className="transform rotate-90 transition-transform duration-300" /> : <FaBars className="transform transition-transform duration-300" />}
+            </button>
+          </div>
+          
+          {/* Mobile Navigation with improved animation and styling */}
+          {mobileMenuOpen && (
+            <nav className="md:hidden py-4 flex flex-col space-y-3 animate-fadeIn">
+              <Link to="/" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Home</Link>
+              <Link to="/write" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Write</Link>
+              <Link to="/about" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">About</Link>
+              <Link to="/contact" className="text-white hover:text-blue-200 px-3 py-2 rounded-md hover:bg-white/10 transition-all duration-300 font-medium">Contact</Link>
+              
+              <div className="relative mt-2">
+                <input 
+                  type="text" 
+                  placeholder="Search..." 
+                  className="w-full bg-white/10 text-white placeholder-white/70 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50"
+                />
+                <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70" />
+              </div>
+              
+              <div className="flex flex-col space-y-2 pt-2">
+                <Link to="/login" className="bg-white text-indigo-600 px-5 py-2 rounded-full font-medium hover:bg-blue-100 transition-colors duration-300 shadow-md text-center">Login</Link>
+                <Link to="/register" className="bg-indigo-800/30 backdrop-blur-sm text-white border border-white/20 px-5 py-2 rounded-full font-medium hover:bg-indigo-800/50 transition-colors duration-300 shadow-md text-center">Sign Up</Link>
+              </div>
+            </nav>
+          )}
+          
+          {/* Decorative elements for the header */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-1/4 w-24 h-24 bg-blue-300 opacity-10 rounded-full blur-3xl"></div>
+        </div>
+      </header>
+
+      {/* Add animation for mobile menu */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+      `}</style>
+
       {/* Modern Hero Section with enhanced styling */}
       <div className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 text-white">
         {/* Abstract geometric shapes for visual interest */}
@@ -79,15 +181,15 @@ const Home = () => {
             {/* Left side content */}
             <div className="lg:w-3/5 space-y-8">
               <div className="space-y-6">
-                <span className="hero-animate opacity-0 inline-block bg-blue-500/30 backdrop-blur-sm text-blue-100 font-semibold px-4 py-2 rounded-full text-sm border border-blue-400/20 transform translate-y-4">The Ultimate Developer Resource</span>
+                <span className="hero-animate opacity-0 inline-block bg-blue-500/30 backdrop-blur-sm text-blue-100 font-semibold px-4 py-2 rounded-full text-sm border border-blue-400/20 transform translate-y-4">Your Space to Share Knowledge</span>
                 
                 <h1 className="hero-animate opacity-0 transform translate-y-4 text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="block mb-2">Where Code</span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">Meets Clarity</span>
+                  <span className="block mb-2">Share Your</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">Story Today</span>
                 </h1>
                 
                 <p className="hero-animate opacity-0 transform translate-y-4 text-xl md:text-2xl text-blue-100/90 max-w-3xl leading-relaxed">
-                  Discover in-depth articles, tutorials, and insights from experienced developers that will help you master modern tech stacks.
+                  Create, share, and discover amazing stories. Join our community of writers and readers passionate about sharing knowledge.
                 </p>
               </div>
               
@@ -116,7 +218,7 @@ const Home = () => {
                   ))}
                 </div>
                 <div className="text-blue-100 text-sm">
-                  <span className="font-semibold">Join 4,000+ developers</span> already sharing knowledge
+                  <span className="font-semibold">Join 4,000+ writers</span> already sharing stories
                 </div>
               </div>
             </div>
@@ -129,11 +231,11 @@ const Home = () => {
                 <div className="relative">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-xl">
-                      ⚛️
+                      ✍️
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white text-lg">Latest from React</h3>
-                      <p className="text-blue-100/70 text-sm">Fresh content daily</p>
+                      <h3 className="font-semibold text-white text-lg">Featured Stories</h3>
+                      <p className="text-blue-100/70 text-sm">Hot off the press</p>
                     </div>
                   </div>
                   
