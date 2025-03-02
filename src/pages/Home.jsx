@@ -30,6 +30,8 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    // Comment out or remove the API call that's causing errors
+    /*
     const fetchPosts = async () => {
       try {
         const res = await axios.get('/api/posts');
@@ -41,6 +43,10 @@ const Home = () => {
       }
     };
     fetchPosts();
+    */
+    
+    // Instead, just set loading to false since we're using context data
+    setLoading(false);
   }, []);
 
   const handleSubscribe = (e) => {

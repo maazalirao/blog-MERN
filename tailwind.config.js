@@ -29,6 +29,7 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    // Use require only if the plugin is installed
+    // Otherwise, comment this out
   ],
 } 
