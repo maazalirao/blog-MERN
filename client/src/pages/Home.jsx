@@ -14,6 +14,16 @@ const Home = () => {
     setIsVisible(true);
   }, []);
 
+  // Animate hero elements with staggered timing
+  useEffect(() => {
+    const heroElements = document.querySelectorAll('.hero-animate');
+    heroElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add('animate-in');
+      }, 300 * index);
+    });
+  }, []);
+
   const handleSubscribe = (e) => {
     e.preventDefault();
     // In a real app, this would call an API to handle the subscription
@@ -50,38 +60,146 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with enhanced styling */}
-      <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`relative z-10 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              The Developer's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Blog</span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
-              Your source for in-depth technical articles, programming tutorials, and development insights from industry experts.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/write" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                Write a Post
-              </Link>
-              <Link to="/explore" className="bg-transparent border-2 border-gray-400 hover:border-white text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:bg-opacity-10">
-                Explore Articles
-              </Link>
+      {/* Modern Hero Section with enhanced styling */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 text-white">
+        {/* Abstract geometric shapes for visual interest */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-blue-400 filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-purple-400 filter blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-indigo-400 filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        </div>
+        
+        {/* Animated code pattern background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-repeat" style={{backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"50\" height=\"50\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"0.1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E')"}}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="py-28 md:py-32 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Left side content */}
+            <div className="lg:w-3/5 space-y-8">
+              <div className="space-y-6">
+                <span className="hero-animate opacity-0 inline-block bg-blue-500/30 backdrop-blur-sm text-blue-100 font-semibold px-4 py-2 rounded-full text-sm border border-blue-400/20 transform translate-y-4">The Ultimate Developer Resource</span>
+                
+                <h1 className="hero-animate opacity-0 transform translate-y-4 text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="block mb-2">Where Code</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">Meets Clarity</span>
+                </h1>
+                
+                <p className="hero-animate opacity-0 transform translate-y-4 text-xl md:text-2xl text-blue-100/90 max-w-3xl leading-relaxed">
+                  Discover in-depth articles, tutorials, and insights from experienced developers that will help you master modern tech stacks.
+                </p>
+              </div>
+              
+              <div className="hero-animate opacity-0 transform translate-y-4 flex flex-wrap gap-4 pt-4">
+                <Link to="/write" className="relative group overflow-hidden rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-medium text-white shadow-lg transition-all duration-300 hover:shadow-blue-500/30 hover:shadow-2xl">
+                  <span className="relative z-10">Write a Post</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute bottom-0 left-0 h-1 w-0 bg-white group-hover:w-full transition-all duration-300 delay-100"></span>
+                </Link>
+                <Link to="/explore" className="relative rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 font-medium text-white transition-all duration-300 hover:bg-white/20">
+                  Explore Articles
+                  <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+              </div>
+              
+              <div className="hero-animate opacity-0 transform translate-y-4 flex flex-col sm:flex-row items-center gap-4 pt-6">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-blue-900 overflow-hidden">
+                      <img 
+                        src={`https://randomuser.me/api/portraits/men/${20 + i}.jpg`} 
+                        alt="Community member"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="text-blue-100 text-sm">
+                  <span className="font-semibold">Join 4,000+ developers</span> already sharing knowledge
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="absolute inset-0 opacity-20">
-            <img 
-              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072"
-              alt="Blog Hero"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-purple-900/30 mix-blend-multiply"></div>
+            
+            {/* Right side floating card */}
+            <div className="hero-animate opacity-0 transform translate-y-4 lg:w-2/5 flex-shrink-0 relative">
+              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl shadow-blue-500/10 p-6 overflow-hidden">
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full filter blur-3xl opacity-50"></div>
+                
+                <div className="relative">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-xl">
+                      ⚛️
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white text-lg">Latest from React</h3>
+                      <p className="text-blue-100/70 text-sm">Fresh content daily</p>
+                    </div>
+                  </div>
+                  
+                  {blogs.slice(0, 2).map((blog, index) => (
+                    <Link 
+                      key={index} 
+                      to={`/blog/${blog.id}`}
+                      className="block mb-5 last:mb-0 p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/10 hover:from-white/10 hover:to-white/20 transition-all duration-300 border border-white/10"
+                    >
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={blog.authorImage || `https://randomuser.me/api/portraits/men/${25 + index}.jpg`}
+                          alt={blog.author}
+                          className="w-10 h-10 rounded-full flex-shrink-0 object-cover border-2 border-indigo-900"
+                        />
+                        <div>
+                          <h4 className="font-medium text-white line-clamp-2">{blog.title}</h4>
+                          <div className="mt-2 flex items-center gap-3 text-xs text-blue-100/70">
+                            <span>{blog.author}</span>
+                            <span className="h-1 w-1 rounded-full bg-blue-300"></span>
+                            <span>{blog.readTime}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                  
+                  <div className="mt-6 pt-5 border-t border-white/10">
+                    <Link 
+                      to="/explore" 
+                      className="flex items-center justify-center w-full text-center text-blue-100 hover:text-white text-sm font-medium transition-colors duration-300"
+                    >
+                      View All Articles
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full filter blur-xl opacity-30 animate-pulse"></div>
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-blue-400 rounded-full filter blur-xl opacity-30 animate-pulse" style={{animationDelay: '1.5s'}}></div>
+            </div>
           </div>
         </div>
         
-        {/* Abstract shapes for visual interest */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50" style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)' }}></div>
+        {/* Wave divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full h-auto">
+            <path fill="#f9fafb" fillOpacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
       </div>
+      
+      {/* Add CSS for hero animations */}
+      <style jsx>{`
+        .hero-animate {
+          transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .hero-animate.animate-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+      `}</style>
 
       {/* Search Section with improved styling */}
       <div className="bg-white shadow-lg py-8 border-b border-gray-100 relative">
