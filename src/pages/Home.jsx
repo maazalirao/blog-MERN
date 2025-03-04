@@ -190,7 +190,7 @@ const Home = () => {
                 <span className="hero-animate opacity-0 inline-block bg-blue-500/30 backdrop-blur-sm text-blue-100 font-semibold px-4 py-2 rounded-full text-sm border border-blue-400/20 transform translate-y-4">Your Space to Share Knowledge</span>
                 
                 <h1 className="hero-animate opacity-0 transform translate-y-4 text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="block mb-2">Share Your</span>
+                  <span className="block mb-2">Hii Abdullah</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">Story Today</span>
                 </h1>
                 
