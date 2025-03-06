@@ -4,7 +4,7 @@ import { useState } from 'react';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = {
-    name: "Maaz Ali",
+    name: "User",
     profilePic: "https://via.placeholder.com/40"
   };
 
